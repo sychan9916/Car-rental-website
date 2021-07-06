@@ -1,0 +1,22 @@
+.chat_history{
+	min-height:400px;
+	width:600px;
+	margin:10px auto;
+	padding:10px;
+	background:#f1f1f1;
+	text-align:left;
+}
+
+.centeralised{
+	width:1000px;
+	margin:10px auto;
+	text-align:center;
+	
+
+}
+
+
+
+.txtarea{
+	
+}
