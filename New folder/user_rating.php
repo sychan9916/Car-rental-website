@@ -8,7 +8,10 @@ error_reporting(0);
 <html>
 <head>
 <style>
+.checked{
+  color: orange;
 
+}
 </style>
 
         <!-- Required meta tags -->
@@ -17,55 +20,51 @@ error_reporting(0);
 
     <!-- Bootstrap CSS -->
 	 <link rel="stylesheet" href="style.css"/>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-</head>
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous"></head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" href="#">	<img src="car.png"></a>
-  
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-
-  <div class="collapse navbar-collapse" id="navbarSupportedContent mains">
-    <ul class="navbar-nav ml-auto">
-      <li class="nav-item active">
-        <a class="nav-link" href="index.php">Home <span class="sr-only">(current)</span></a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" id="noti_number" href="chatlist.php">Contact</a>
-      </li>
-	      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="index.php"><img src="car.png"></a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button> 
+    <div class="collapse navbar-collapse "   style="margin-left:74%" id="navbarNavDropdown">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="index.php">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="chatlist.php">Contact</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Pricing</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
           Listing
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="new_list.php">NEW</a>
-		  
-		  <a class="dropdown-item" href="mylist.php ">MY LISTING</a>
-		  
-</div>
-
-
-      </li>
-
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+            <li><a class="dropdown-item" href="new_list.php">NEW</a></li>
+            <li><a class="dropdown-item" href="mylist.php">MY LISTING</a></li>
+            <li><a class="dropdown-item" href="#">Something else here</a></li>
+          </ul>
+        </li>
+         <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
           <?php echo $_SESSION['username']; ?>
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="#">Setting</a>
-          <a class="dropdown-item" href="#">History</a>
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="logout.php">Log Out</a>
-        </div>
-      </li>
-
-    </ul>
-
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+            <li><a class="dropdown-item" href="">Setting</a></li>
+            <li><a class="dropdown-item" href="">History</a></li>
+            <li><a class="dropdown-item" href="logout.php">Log Out</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div>
   </div>
-
 </nav>
+
 
 <div>
 <table style='margin-left:30%;'>
@@ -129,6 +128,8 @@ if (mysqli_num_rows($result) > 0) {
 
 
 
+
+
 ?>
 </td>
 </tr>
@@ -170,22 +171,78 @@ $dbs =mysqli_connect("localhost", "root", "", "project");
 $sql = "select * from ratubg where pull_user='".$pull_user."'";
 $result = mysqli_query($dbs,$sql);
 	$resultcheck = mysqli_num_rows($result);
+
+  echo '<div class="list-group">';
 	
 	if($resultcheck >0) {
 
 $a=0;
 
 
+
+
+
 while ($row = mysqli_fetch_array($result))
 {
+  echo '<a href="#" class="list-group-item list-group-item-action " aria-current="true">
+  <div class="d-flex w-100 justify-content-between">';
+  echo '<h5 class="mb-1">Rating:'.$row['star'];
 
-echo "<table style='border:solid'>";
-	$as=$a++;
-	
-echo "<tr style='border:solid'><td style='font-weight:bold;'>User:</td><td>".$row['push_user']."</td></tr><tr><td style='border:solid;font-weight:bold;'>Rating:</td><td style='border:solid;'>".$row['star']."</td></tr><tr><td style='border:solid;font-weight:bold;'>Comment:</td><td style='border:solid;'>".$row['comment']."</td></tr><tr><td style='font-weight:bold;'>Date post:</td><td style='border:solid'>".$row['date']."</td></tr>";
+  if ($row["star"]==1)
+  { 
+    echo '
+    <span class="fa fa-star checked"></span>
+    <span class="fa fa-star "></span>
+    <span class="fa fa-star "></span>
+    <span class="fa fa-star "></span>
+    <span class="fa fa-star"></span></h5>';
+  }
+  else if ($row["star"]==2)
+  {
+    echo '
+    <span class="fa fa-star checked"></span>
+    <span class="fa fa-star checked"></span>
+    <span class="fa fa-star "></span>
+    <span class="fa fa-star "></span>
+    <span class="fa fa-star"></span></h5>';
+  }
+  else if ($row["star"]==3){
+    echo '
+    <span class="fa fa-star checked"></span>
+    <span class="fa fa-star checked"></span>
+    <span class="fa fa-star checked"></span>
+    <span class="fa fa-star "></span>
+    <span class="fa fa-star"></span></h5>';
+  }
+  else if ($row["star"]==4){
+    echo '
+    <span class="fa fa-star checked"></span>
+    <span class="fa fa-star checked"></span>
+    <span class="fa fa-star checked"></span>
+    <span class="fa fa-star checked"></span>
+    <span class="fa fa-star"></span></h5>';
+  }
+  else{
+    echo '
+    <span class="fa fa-star checked"></span>
+    <span class="fa fa-star checked"></span>
+    <span class="fa fa-star checked"></span>
+    <span class="fa fa-star checked"></span>
+    <span class="fa fa-star checked"></span></h5>';
+  }
+    
+    
+echo '
+    <small>'.$row['date'].'</small>
+  </div>
+  <p class="mb-1">Comment:'.$row['comment'].'</p>
+  <small>User:'.$row['push_user'].'</small>
+</a>';
 
-	echo "</table><br>";}
 
+
+
+}
 }
 
 	else{
@@ -193,6 +250,7 @@ echo "<tr style='border:solid'><td style='font-weight:bold;'>User:</td><td>".$ro
 	}
 
 	?>
+
 
 
 
@@ -233,10 +291,12 @@ echo '</script>';
 
       <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
- 
- 
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
+<!-- Footer -->
+
+<?php
+include("footer.html");
+?>
 </body>
 </html>
